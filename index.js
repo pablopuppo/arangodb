@@ -20,7 +20,7 @@ router.get('/ga-log', function (req, res) {
   .description('Prints a generic greeting.');
 
   router.post('/ga-log', function (req, res) {
-    const data = req.body;
+    const data = req.body.values;
     var doc = {
         algo: 'test',
         par: data.parm1
