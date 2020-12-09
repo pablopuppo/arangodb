@@ -2,6 +2,7 @@
 const createRouter = require('@arangodb/foxx/router');
 const db = require('@arangodb').db;
 const { query } = require("@arangodb");
+const foxxColl = db._collection('gaLog');
 const collectionName = 'ga';
 const router = createRouter();
 
@@ -19,11 +20,9 @@ router.get('/ga-log', function (req, res) {
   .description('Prints a generic greeting.');
 
   router.post('/ga-log', function (req, res) {
-    const run = query`
-        INSERT { "parms": ${req} , "time": DATE_NOW()} INTO 'gaLog'
-    `
-
-    res.send(run);
+    const data = req.body;
+    const meta = foxxColl.save(req.body);
+    res.send(Object.assign(data, meta));
   })
   .response(['text/plain'], 'A generic greeting.')
   .summary('Generic greeting')
