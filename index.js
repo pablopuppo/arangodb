@@ -20,7 +20,7 @@ router.get('/ga-log', function (req, res) {
 
   router.post('/ga-log', function (req, res) {
     const run = query`
-        INSERT { "parms": "POST" , "time": DATE_NOW()} INTO 'gaLog'
+        INSERT { "parms": ${req} , "time": DATE_NOW()} INTO 'gaLog'
     `
 
     res.send(run);
