@@ -21,7 +21,11 @@ router.get('/ga-log', function (req, res) {
 
   router.post('/ga-log', function (req, res) {
     const data = req.body;
-    const meta = foxxColl.save(req.body);
+    var doc = {
+        algo: 'test',
+        par: data.parm1
+    }
+    const meta = foxxColl.save(doc);
     res.send(Object.assign(data, meta));
   })
   .response(['text/plain'], 'A generic greeting.')
