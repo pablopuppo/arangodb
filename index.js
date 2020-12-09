@@ -9,7 +9,7 @@ module.context.use(router);
 
 router.get('/ga-log', function (req, res) {
     const run = query`
-        INSERT { "parms": "GET" , "time": DATE_NOW()} INTO 'gaLog'
+        INSERT { "parms": "GET" , "time": DATE_NOW(), "version": 1} INTO 'gaLog'
     `
 
     res.send(run);
@@ -20,7 +20,7 @@ router.get('/ga-log', function (req, res) {
 
   router.post('/ga-log', function (req, res) {
     const run = query`
-        INSERT { "obj": ${req} , "time": DATE_NOW()} INTO 'gaLog'
+        INSERT { "parms": "POST" , "time": DATE_NOW()} INTO 'gaLog'
     `
 
     res.send(run);
@@ -28,3 +28,4 @@ router.get('/ga-log', function (req, res) {
   .response(['text/plain'], 'A generic greeting.')
   .summary('Generic greeting')
   .description('Prints a generic greeting.');
+
