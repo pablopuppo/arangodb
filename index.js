@@ -1,5 +1,6 @@
 'use strict';
 const createRouter = require('@arangodb/foxx/router');
+const joi = require('joi');
 const db = require('@arangodb').db;
 const { query } = require("@arangodb");
 const foxxColl = db._collection('gaLog');
@@ -20,15 +21,13 @@ router.get('/ga-log', function (req, res) {
   .description('Prints a generic greeting.');
 
   router.post('/ga-log', function (req, res) {
-    const data = req.body.values;
-    var doc = {
-        algo: 'test',
-        par: data.parm1
-    }
-    const meta = foxxColl.save(doc);
+    const data = req.body;
+    
+    const meta = foxxColl.save(req.body);
     res.send(Object.assign(data, meta));
   })
-  .response(['text/plain'], 'A generic greeting.')
+  .body(joi.object().required(), 'Entry to store in the collection')
+  .response(joi.object().required(), 'Entry stored in the collection')
   .summary('Generic greeting')
   .description('Prints a generic greeting.');
 
