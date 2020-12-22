@@ -24,7 +24,7 @@ router.get('/ga-log', function (req, res) {
     const data = req.body;
     if (data._key) {
       const run = query`
-      FOR l in gaLog FILTER l._key == ${data._key} update l WITH { diff: 'ok' } INTO 'gaLog'
+      FOR l in gaLog FILTER l._key == '${data._key}' update l WITH { diff: 'ok' } INTO 'gaLog'
   `
 
     res.send(run);
