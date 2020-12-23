@@ -13,8 +13,8 @@ router.get('/ga-log', function (req, res) {
     const run = query`
         for l in gaLog return l
     `.toArray();
-    
-    res.send(JSON.parse(run));
+    var tt = foxxColl.get();
+    res.send(tt);
   })
   .response(['text/plain'], 'A generic greeting.')
   .summary('Generic greeting')
