@@ -11,7 +11,7 @@ module.context.use(router);
 
 router.get('/ga-log', function (req, res) {
     const run = query`
-        INSERT { "parms": "GET" , "time": DATE_NOW(), "version": 1} INTO 'gaLog'
+        for l in gaLog return l
     `
 
     res.send(run);
@@ -20,7 +20,7 @@ router.get('/ga-log', function (req, res) {
   .summary('Generic greeting')
   .description('Prints a generic greeting.');
 
-  router.post('/ga-log', function (req, res) {
+router.post('/ga-log', function (req, res) {
     const data = req.body;
     if (data._key) {
       const run = query`
