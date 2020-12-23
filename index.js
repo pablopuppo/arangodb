@@ -12,8 +12,8 @@ module.context.use(router);
 router.get('/ga-log', function (req, res) {
     const run = query`
         for l in gaLog return l
-    `
-
+    `.toArray();
+    
     res.send(run);
   })
   .response(['text/plain'], 'A generic greeting.')
