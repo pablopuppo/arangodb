@@ -14,7 +14,7 @@ router.get('/ga-log', function (req, res) {
         for l in gaLog return l
     `.toArray();
     
-    res.send(run);
+    res.send(JSON.parse(run));
   })
   .response(['text/plain'], 'A generic greeting.')
   .summary('Generic greeting')
